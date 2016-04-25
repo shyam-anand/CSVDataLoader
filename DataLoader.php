@@ -10,9 +10,16 @@ class DataLoader {
     private $dbh = null;
     private $dry_run;
 
-    function __construct($source_file, $table, $dbname, $user, $password, $dbhost, $invalid_rows_fname, $dry_run = false) {
-        $this->source_file = $source_file;
-        $this->invalid_rows_fname = $invalid_rows_fname;
+    /**
+     * DataLoader constructor.
+     * @param $table
+     * @param $dbname
+     * @param $user
+     * @param $password
+     * @param $dbhost
+     * @param bool $dry_run
+     */
+    function __construct($table, $dbname, $user, $password, $dbhost, $dry_run = false) {
         $this->table = $table;
         $this->dry_run = $dry_run;
         
