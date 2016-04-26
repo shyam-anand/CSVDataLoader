@@ -53,7 +53,7 @@ class DataLoader
     function load($source_file, $invalid_rows_file)
     {
 
-        $this->logger->info(" Dry run - {$this->dry_run}");
+        $this->logger->info(" Dry run - " .  var_export($this->dry_run, true));
 
         $this->source_fh = fopen($source_file, "r");
         if (!$this->source_fh) {
@@ -84,7 +84,7 @@ class DataLoader
                 $this->invalid_rows[] = $row;
                 fwrite($this->invalid_rows_fh, $line);
             } else {
-                if (!$this->dry_run) {
+                if ($this->dry_run === false) {
                     if (!$stmt->execute($csv)) {
                         trigger_error("Insert failed", E_USER_ERROR);
                     }

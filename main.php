@@ -27,6 +27,7 @@ $source = $cmd_opts['f'];
 $table = $cmd_opts['t'];
 $dbname = $cmd_opts['d'];
 $user = $cmd_opts['u'];
+$pswd = '';
 if ($cmd_opts['p'] == '') {
     $pswd = readline("Password: ");
 } else {
@@ -46,6 +47,7 @@ if (array_key_exists('invalid-rows-file', $cmd_opts)) {
 
 $verbosity = array_key_exists('v', $cmd_opts) ? 1 : 0;
 $dry_run = array_key_exists('dry', $cmd_opts);
+
 
 // -- //
 
