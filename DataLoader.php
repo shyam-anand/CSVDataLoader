@@ -86,7 +86,8 @@ class DataLoader
             } else {
                 if ($this->dry_run === false) {
                     if (!$stmt->execute($csv)) {
-                        trigger_error("Insert failed", E_USER_ERROR);
+                        $error_info = $stmt->errorInfo();
+                        trigger_error("Insert failed: [{$error_info[0]}] {$error_info[2]}", E_USER_ERROR);
                     }
                 }
                 $this->inserted_rows_count++;
