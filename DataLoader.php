@@ -41,6 +41,11 @@ class DataLoader {
     }
 
     function load($source_file, $invalid_rows_file) {
+
+        if ($this->verbosity && $this->dry_run) {
+            echo " -- DRY RUN --\n";
+        }
+
         $this->source_fh = fopen($source_file, "r");
         if (!$this->source_fh) {
             trigger_error("Unable to open {$source_file} for reading\n");
