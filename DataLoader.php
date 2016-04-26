@@ -57,12 +57,13 @@ class DataLoader {
 
         $row = 1;
         $this->inserted_rows_count = 0;
+        $fields_count = count($this->fields);
 
         while ( ($line = fgets($this->source_fh) ) !== false ) {
             $csv = str_getcsv($line);
-            if (count($csv) != 9 ) {
+            if (count($csv) != $fields_count ) {
                 if ($this->verbosity > 0) {
-                    echo "Invalid row $row\n";
+                    echo "Invalid row $row. " . count($csv) . " fields instead of $fields_count\n";
                     echo implode(" | ", $csv);
                     echo "\n";
                 }
