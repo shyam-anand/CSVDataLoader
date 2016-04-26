@@ -70,6 +70,14 @@ class DataLoader {
         }
     }
 
+    function get_inserted_rows_count() {
+        return $this->inserted_rows_count;
+    }
+
+    function get_invalid_rows() {
+        return $this->invalid_rows;
+    }
+
     function __destruct() {
         fclose($this->invalid_rows_fh);
         fclose($this->source_fh);
