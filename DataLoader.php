@@ -85,7 +85,9 @@ class DataLoader
                 fwrite($this->invalid_rows_fh, $line);
             } else {
                 if (!$this->dry_run) {
-                    $stmt->execute($csv);
+                    if (!$stmt->execute($csv)) {
+                        trigger_error("Insert failed", E_USER_ERROR);
+                    }
                 }
                 $this->inserted_rows_count++;
             }
