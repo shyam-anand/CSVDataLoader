@@ -8,7 +8,8 @@ class DataLoader {
     private $source_fh;
     private $invalid_rows_fh;
     private $dbh = null;
-    private $dry_run;
+    private $dry_run = false;
+    private $verbosity = 0;
 
     /**
      * DataLoader constructor.
@@ -18,10 +19,12 @@ class DataLoader {
      * @param $password
      * @param $dbhost
      * @param bool $dry_run
+     * @param int $verbosity
      */
-    function __construct($table, $dbname, $user, $password, $dbhost, $dry_run = false) {
+    function __construct($table, $dbname, $user, $password, $dbhost, $dry_run = false, $verbosity = 0) {
         $this->table = $table;
         $this->dry_run = $dry_run;
+        $this->verbosity =$verbosity;
         
         try {
             $this->dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $user, $password);
@@ -58,6 +61,11 @@ class DataLoader {
         while ( ($line = fgets($this->source_fh) ) !== false ) {
             $csv = str_getcsv($line);
             if (count($csv) != 9 ) {
+                if ($this->verbosity > 0) {
+                    echo "Invalid row $row\n";
+                    echo implode(" ", $csv);
+                    echo "\n";
+                }
                 $this->invalid_rows[] = $row;
                 fwrite($this->invalid_rows_fh, $line);
             } else {

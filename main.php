@@ -1,6 +1,6 @@
 <?php
 require 'DataLoader.php';
-$cmd_opts = getopt("f:t:s:d:u:p::h:", array("invalid-rows-file:","dry"));
+$cmd_opts = getopt("f:t:s:d:u:p::h:v", array("invalid-rows-file:","dry"));
 
 $mandatory_opts = array('f', 't', 'd', 'u', 'p');
 $cmd_opts_keys = array_keys($cmd_opts);
@@ -30,12 +30,13 @@ if (array_key_exists('invalid-rows-file', $cmd_opts)) {
     $invalid_rows_fname = "invalid-rows.csv";
 }
 
+$verbosity = array_key_exists('v', $cmd_opts) ? 1 : 0;
 $dry_run = array_key_exists('dry', $cmd_opts);
 
 
-$loader = new DataLoader($table, $dbname, $user, $pswd, $host, $dry_run);
+$loader = new DataLoader($table, $dbname, $user, $pswd, $host, $dry_run, $verbosity);
 $loader->load($source, $invalid_rows_fname);
 
-echo $loader->get_inserted_rows_count() . " rows inserted";
+echo $loader->get_inserted_rows_count() . " rows inserted\n";
 echo count($loader->get_invalid_rows()) . " invalid rows";
 echo "\n\n";
