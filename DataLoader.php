@@ -29,7 +29,6 @@ class DataLoader {
     function __construct($table, $dbname, $user, $password, $dbhost, $dry_run = false, $verbosity = 0) {
 
         $this->logger = new Monolog\Logger("CSVDataLoader");
-        $this->logger->pushHandler(new \Monolog\Handler\PHPConsoleHandler());
 
         $this->table = $table;
         $this->dry_run = $dry_run;
