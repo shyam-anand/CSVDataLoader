@@ -46,7 +46,7 @@ class DataLoader
         foreach ($desc_tables as $row) {
             $this->fields[] = $row['Field'];
         }
-        $this->value_placeholders = implode(',', array_fill(0, count($this->fields), '?'));
+        $this->value_placeholders = implode(', ', array_fill(0, count($this->fields), '?'));
 
     }
 
@@ -67,7 +67,7 @@ class DataLoader
             die;
         }
 
-        $insert_stmt = "INSERT INTO {$this->table} " . implode(',', $this->fields) . " VALUES $this->value_placeholders";
+        $insert_stmt = "INSERT INTO {$this->table} (" . implode(', ', $this->fields) . ") VALUES ($this->value_placeholders)";
         $this->logger->debug("Preparing insert statement - $insert_stmt");
         $stmt = $this->dbh->prepare($insert_stmt);
 
@@ -88,6 +88,7 @@ class DataLoader
                     if (!$stmt->execute($csv)) {
                         $error_info = $stmt->errorInfo();
                         trigger_error("Insert failed: [{$error_info[0]}] {$error_info[2]}", E_USER_ERROR);
+                        die;
                     }
                 }
                 $this->inserted_rows_count++;
