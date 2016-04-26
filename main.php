@@ -33,8 +33,10 @@ if (array_key_exists('invalid-rows-file', $cmd_opts)) {
 $verbosity = array_key_exists('v', $cmd_opts) ? 1 : 0;
 $dry_run = array_key_exists('dry', $cmd_opts);
 
+// -- //
 
 $loader = new DataLoader($table, $dbname, $user, $pswd, $host, $dry_run, $verbosity);
+$loader->set_log_file("log/CSVDataLoader.log");
 $loader->load($source, $invalid_rows_fname);
 
 echo $loader->get_inserted_rows_count() . " rows inserted\n";
