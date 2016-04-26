@@ -1,4 +1,18 @@
 <?php
+
+/**
+ * This is a command line script which uses DataLoader class to write data from a specified CSV to file the specified table.
+ * Usage: php main.php -f source_file -t table_name -d db_name -h db_host -u db_user -p [db_password] [--invalid-rows-file invalid_rows_filename] [--dry dry_run]
+ * -f source_file The CSV file to read from
+ * -t table_name The table to which the data is to be written
+ * -d db_name Database name
+ * -h db_host Database host
+ * -u db_user Database username
+ * -p db_password Database password. Can be either given directly in the command line (not recommended), or at the prompt
+ * --invalid-rows-file invalid_rows_filename The file to which invalid rows are to be written
+ * --dry dry_run If specified, data won't be inserted to the table. Useful for sanitizing data.
+ */
+
 require 'DataLoader.php';
 $cmd_opts = getopt("f:t:s:d:u:p::h:v", array("invalid-rows-file:","dry"));
 
