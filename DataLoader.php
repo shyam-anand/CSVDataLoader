@@ -88,7 +88,7 @@ class DataLoader
                     if (!$stmt->execute($csv)) {
                         $error_info = $stmt->errorInfo();
 
-                        if (strpos($error_info[2], "Incorrect string value")) {
+                        if (strpos($error_info[2], "Incorrect string value") !== false) {
                             $this->logger->warn($error_info[2] . " for values " . implode(", ", $csv));
                             $this->invalid_rows[] = $row;
                         } else {
