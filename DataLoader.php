@@ -49,7 +49,7 @@ class DataLoader {
             trigger_error("Unable to open {$invalid_rows_file} for writing\n");
         }
 
-        $insert_stmt = "INSERT INTO {$this->table} " . array_implode(',', $this->fields) . " VALUES $this->value_placeholders";
+        $insert_stmt = "INSERT INTO {$this->table} " . implode(',', $this->fields) . " VALUES $this->value_placeholders";
         $stmt = $this->dbh->prepare($insert_stmt);
 
         $row = 1;
