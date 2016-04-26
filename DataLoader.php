@@ -89,6 +89,7 @@ class DataLoader
                         $error_info = $stmt->errorInfo();
 
                         if (strpos($error_info[2], "Incorrect string value")) {
+                            $this->logger->warn($error_info[2] . " for values " . implode(", ", $csv));
                             $this->invalid_rows[] = $row;
                         } else {
                             trigger_error("Insert failed: [{$error_info[0]}] {$error_info[2]} ({$error_info[1]}) for values " . implode(", ", $csv), E_USER_ERROR);
