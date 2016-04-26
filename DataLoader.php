@@ -81,8 +81,7 @@ class DataLoader
                 $this->logger->debug("Invalid row $row, " . count($csv) . " fields instead of $fields_count");
                 $this->logger->debug(implode(" | ", $csv));
 
-                $this->invalid_rows[] = $row;
-                fwrite($this->invalid_rows_fh, $line);
+                invalid_row($line);
             } else {
                 if ($this->dry_run === false) {
                     if (!$stmt->execute($csv)) {
@@ -90,7 +89,7 @@ class DataLoader
 
                         if (strpos($error_info[2], "Incorrect string value") !== false) {
                             $this->logger->warn($error_info[2] . " for values " . implode(", ", $csv));
-                            $this->invalid_rows[] = $row;
+                            $this->invalid_row($line);
                         } else {
                             trigger_error("Insert failed: [{$error_info[0]}] {$error_info[2]} ({$error_info[1]}) for values " . implode(", ", $csv), E_USER_ERROR);
                             die;
@@ -121,6 +120,11 @@ class DataLoader
     function get_invalid_rows()
     {
         return $this->invalid_rows;
+    }
+
+    function invalid_row($row) {
+        $this->invalid_rows[] = $row;
+        fwrite($this->invalid_rows_fh, $row);
     }
 
     function __destruct()
