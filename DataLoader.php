@@ -63,7 +63,7 @@ class DataLoader {
             if (count($csv) != 9 ) {
                 if ($this->verbosity > 0) {
                     echo "Invalid row $row\n";
-                    echo implode(" ", $csv);
+                    echo implode(" | ", $csv);
                     echo "\n";
                 }
                 $this->invalid_rows[] = $row;
