@@ -33,7 +33,7 @@ class DataLoader {
         foreach ($desc_tables as $row) {
             $this->fields[] = $row['Field'];
         }
-        $this->value_placeholders = array_fill(0, count($this->fields), '?');
+        $this->value_placeholders = implode(',', array_fill(0, count($this->fields), '?'));
 
     }
 
