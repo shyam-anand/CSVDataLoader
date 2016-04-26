@@ -63,7 +63,7 @@ class DataLoader {
             $csv = str_getcsv($line);
             if (count($csv) != $fields_count ) {
                 if ($this->verbosity > 0) {
-                    echo "Invalid row $row. " . count($csv) . " fields instead of $fields_count\n";
+                    echo "Invalid row $row, " . count($csv) . " fields instead of $fields_count\n";
                     echo implode(" | ", $csv);
                     echo "\n";
                 }
