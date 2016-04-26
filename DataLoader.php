@@ -88,9 +88,11 @@ class DataLoader
                     if (!$stmt->execute($csv)) {
                         $error_info = $stmt->errorInfo();
 
-
-
-                        trigger_error("Insert failed: [{$error_info[0]}] {$error_info[2]} ({$error_info[1]}) for values " . implode(", ", $csv), E_USER_ERROR);
+                        if (strpos($error_info[2], "Incorrect string value")) {
+                            $this->invalid_rows[] = $row;
+                        } else {
+                            trigger_error("Insert failed: [{$error_info[0]}] {$error_info[2]} ({$error_info[1]}) for values " . implode(", ", $csv), E_USER_ERROR);
+                        }
                         die;
                     }
                 }
