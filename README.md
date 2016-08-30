@@ -13,7 +13,7 @@ Loads data from a CSV file to MySQL table
 -d db_name Target database
 -h db_host Database hostname
 -u db_user Database username
--p [db_password] Database password. Optional. If omitted, will be prompted at run-time.
+-p [db_password] Database password. Optional to give the password here. If -p is set without value, will be prompted for the password at run-time.
 --invalid-rows-file filename File name to which the rows which could not be processed will be written. Usefull if there are lines with incorrect formatting
 --dry If set, data will not be inserted to the table
 ```
