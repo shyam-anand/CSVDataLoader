@@ -4,13 +4,7 @@ Loads data from a CSV file to MySQL table
 ## Dependencies
 [monolog](https://github.com/Seldaek/monolog) managed by [Composer](https://getcomposer.org)
 
-`composer install`
-
-OR
-
-`php composer.phar install`
-
-depending on your installation.
+Run `composer install` or `php composer.phar install` depending on your Composer installation.
 
 ## Usage
 `php main.php -f <filename> -t <table> -d <dbname> -h <db_host> -u <db_user> -p [<db_password>] [--invalid-rows-file filename] [--dry dry_run]`
